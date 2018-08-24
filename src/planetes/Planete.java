@@ -11,13 +11,14 @@ public abstract class Planete {
     private Item[] listeItem;
 
     public void explorer(Vaisseau vaisseau) {
+        vaisseau.getListePlaneteVisite().push(this);
         System.out.println("Vous explorez la planète "+nom+".");
         vaisseau.setCarburant(vaisseau.getCarburant()-cout);
         System.out.println("Vous dépensez "+cout+" litres d'essence");
         if (vaisseau.getCarburant()<=0)
             vide(vaisseau);
         int rng=(int)(Math.random()*5+1);
-        if (rng<chancePirate)
+        if (rng<=chancePirate)
             pirates(vaisseau);
         int rng2=(int)(Math.random()*listeItem.length);
         vaisseau.getInventaire().add(listeItem[rng2]);
@@ -39,5 +40,37 @@ public abstract class Planete {
         System.out.println("Votre vaisseau manque d’essence.\n"+
                 "Fin de la partie");
         Main.end();
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public int getCout() {
+        return cout;
+    }
+
+    public void setCout(int cout) {
+        this.cout = cout;
+    }
+
+    public int getChancePirate() {
+        return chancePirate;
+    }
+
+    public void setChancePirate(int chancePirate) {
+        this.chancePirate = chancePirate;
+    }
+
+    public Item[] getListeItem() {
+        return listeItem;
+    }
+
+    public void setListeItem(Item[] listeItem) {
+        this.listeItem = listeItem;
     }
 }

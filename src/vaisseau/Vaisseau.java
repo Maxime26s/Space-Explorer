@@ -1,13 +1,14 @@
 package vaisseau;
 
 import items.Item;
+import main.Main;
 import planetes.Planete;
 
 import java.util.ArrayList;
 import java.util.Stack;
 
 public class Vaisseau {
-    Stack<Planete> planete;
+    Stack<Planete> listePlaneteVisite;
     int carburant;
     int pv;
     ArrayList<Item> inventaire;
@@ -21,8 +22,8 @@ public class Vaisseau {
         Vaisseau vaisseauPast;
     }
 
-    public Vaisseau(Stack<Planete> planete, int carburant, int pv, ArrayList<Item> inventaire, Vaisseau vaisseauPast) {
-        this.planete = planete;
+    public Vaisseau(Stack<Planete> listePlaneteVisite, int carburant, int pv, ArrayList<Item> inventaire, Vaisseau vaisseauPast) {
+        this.listePlaneteVisite = listePlaneteVisite;
         this.carburant = carburant;
         this.pv = pv;
         this.inventaire = inventaire;
@@ -31,7 +32,7 @@ public class Vaisseau {
 
     public void etat(){
         System.out.print("État du vaisseau :\n" +
-                "    Planète courante : "+planete+"\n" +
+                "    Planète courante : "+ listePlaneteVisite +"\n" +
                 "    Quantité carburant : "+carburant+"\n" +" litres\n" +
                 "    Points de vie : "+pv+"\n" +
                 "    Inventaire : \n");
@@ -40,12 +41,20 @@ public class Vaisseau {
         }
     }
 
-    public Stack<Planete> getPlanete() {
-        return planete;
+    public void choixItem(){
+        System.out.println("Quel objet voulez-vous utiliser ?");
+        for(int i=0;i<inventaire.size();i++)
+            System.out.println(" "+i+1+"- "+inventaire.get(i).getNom());
+        System.out.print("Votre choix : ");
+        inventaire.get(Main.testInt()-1).use();
     }
 
-    public void setPlanete(Stack<Planete> planete) {
-        this.planete = planete;
+    public Stack<Planete> getListePlaneteVisite() {
+        return listePlaneteVisite;
+    }
+
+    public void setListePlaneteVisite(Stack<Planete> listePlaneteVisite) {
+        this.listePlaneteVisite = listePlaneteVisite;
     }
 
     public int getCarburant() {
