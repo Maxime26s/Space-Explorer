@@ -7,6 +7,7 @@ public class Saturne extends Planete{
         setNom("Saturne");
         setCout(400);
         setChancePirate(0);
+        setListeItem(new Item[3]);
         getListeItem()[0]=new GrosGaz();
         getListeItem()[1]=new PetitGaz();
         getListeItem()[2]=new PetitKit();

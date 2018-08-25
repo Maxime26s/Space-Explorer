@@ -7,6 +7,7 @@ public class Venus extends Planete{
         setNom("Vénus");
         setCout(100);
         setChancePirate(3);
+        setListeItem(new Item[3]);
         getListeItem()[0]=new GrosKit();
         getListeItem()[1]=new PetitGaz();
         getListeItem()[2]=new MoyenKit();

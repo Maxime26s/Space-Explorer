@@ -7,6 +7,7 @@ public class Mars extends Planete{
         setNom("Mars");
         setCout(200);
         setChancePirate(2);
+        setListeItem(new Item[3]);
         getListeItem()[0]=new MoyenGaz();
         getListeItem()[1]=new MoyenKit();
         getListeItem()[2]=new PetitKit();

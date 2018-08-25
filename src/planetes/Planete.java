@@ -12,17 +12,17 @@ public abstract class Planete {
 
     public void explorer(Vaisseau vaisseau) {
         vaisseau.getListePlaneteVisite().push(this);
-        System.out.println("Vous explorez la planète "+nom+".");
+        System.out.println("\n"+"Vous explorez la planète "+nom+".");
         vaisseau.setCarburant(vaisseau.getCarburant()-cout);
         System.out.println("Vous dépensez "+cout+" litres d'essence");
         if (vaisseau.getCarburant()<=0)
-            vide(vaisseau);
+            vide();
         int rng=(int)(Math.random()*5+1);
         if (rng<=chancePirate)
             pirates(vaisseau);
         int rng2=(int)(Math.random()*listeItem.length);
         vaisseau.getInventaire().add(listeItem[rng2]);
-        System.out.print("Vous obtenez : "+listeItem[rng2]);
+        System.out.println("Vous obtenez : "+listeItem[rng2].getNom());
     }
 
     public void pirates(Vaisseau vaisseau){
@@ -36,8 +36,9 @@ public abstract class Planete {
         }
     }
 
-    public void vide(Vaisseau vaisseau){
-        System.out.println("Votre vaisseau manque d’essence.\n"+
+    public void vide(){
+        System.out.println("\n"+
+                "Votre vaisseau manque d’essence.\n"+
                 "Fin de la partie");
         Main.end();
     }

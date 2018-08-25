@@ -12,13 +12,13 @@ public class Main {
     public static Planete[] listePlanetes=new Planete[5];
     public static void main(String[] args) {
         start();
-        System.out.println("Bievenue dans Space Explorer !");
         while(true)
-        choixSwitch(listeChoix());
+            choixSwitch(listeChoix());
     }
 
     public static int listeChoix(){
-        System.out.print("Que désirez-vous faire ?\n" +
+        System.out.print("\n"+
+                "Que désirez-vous faire ?\n" +
                 " 1- Examiner le vaisseau\n" +
                 " 2- Explorer une planète\n" +
                 " 3- Utiliser un objet dans l'inventaire\n" +
@@ -52,7 +52,7 @@ public class Main {
 
     public static void explorer(){
         vaisseau.setVaisseauPast(new Vaisseau(vaisseau.getListePlaneteVisite(), vaisseau.getCarburant(), vaisseau.getPv(), vaisseau.getInventaire(), vaisseau.getVaisseauPast()));
-        listePlanetes[(int)(Math.random()*5+1)].explorer(vaisseau);
+        listePlanetes[(int)(Math.random()*5)].explorer(vaisseau);
     }
 
     public static void start(){
@@ -61,6 +61,7 @@ public class Main {
         listePlanetes[2]=new Mercure();
         listePlanetes[3]=new Jupiter();
         listePlanetes[4]=new Saturne();
+        vaisseau.getListePlaneteVisite().push(new Terre());
         System.out.println("Bievenue dans Space Explorer !");
     }
 
@@ -72,10 +73,12 @@ public class Main {
             tempStack.push(vaisseau.getListePlaneteVisite().pop());
         }
         for(int i=0;i<tempsize;i++){
-            System.out.println(tempStack.pop()+" -> ");
-            if (i==tempsize)
-                System.out.println(tempStack.pop());
+            if (i==tempsize-1)
+                System.out.print(tempStack.pop().getNom());
+            else
+                System.out.print(tempStack.pop().getNom()+" -> ");
         }
+        System.exit(0);
     }
 
     public static int testInt(){

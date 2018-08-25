@@ -15,38 +15,56 @@ public class Vaisseau {
     Vaisseau vaisseauPast;
 
     public Vaisseau() {
-        Stack<Planete> planete=new Stack<>();
-        int carburant=1000;
-        int pv=100;
-        ArrayList<Item> inventaire = new ArrayList<>();
-        Vaisseau vaisseauPast;
+        this.listePlaneteVisite=new Stack<>();
+        this.carburant=1000;
+        this.pv=100;
+        this.inventaire = new ArrayList<>();
     }
 
     public Vaisseau(Stack<Planete> listePlaneteVisite, int carburant, int pv, ArrayList<Item> inventaire, Vaisseau vaisseauPast) {
-        this.listePlaneteVisite = listePlaneteVisite;
+        this.listePlaneteVisite=new Stack<>();
+        ArrayList<Planete> tempList = new ArrayList<>();
+        int tempSize = listePlaneteVisite.size();
+        for(int i=0;i<tempSize;i++)
+                tempList.add(listePlaneteVisite.pop());
+        for(int i=tempSize-1;i>=0;i--) {
+            this.listePlaneteVisite.push(tempList.get(i));
+            listePlaneteVisite.push(tempList.get(i));
+        }
+        this.inventaire = new ArrayList<>();
+        tempSize=inventaire.size();
+        for(int i=0;i<tempSize;i++)
+            inventaire.add(inventaire.get(i));
         this.carburant = carburant;
         this.pv = pv;
-        this.inventaire = inventaire;
         this.vaisseauPast = vaisseauPast;
     }
 
     public void etat(){
-        System.out.print("État du vaisseau :\n" +
-                "    Planète courante : "+ listePlaneteVisite +"\n" +
-                "    Quantité carburant : "+carburant+"\n" +" litres\n" +
+        System.out.print("\n"+
+                "État du vaisseau :\n" +
+                "    Planète courante : "+ listePlaneteVisite.peek().getNom() +"\n" +
+                "    Quantité carburant : "+carburant+" litres\n" +
                 "    Points de vie : "+pv+"\n" +
                 "    Inventaire : \n");
         for(int i=0;i<inventaire.size();i++) {
-            System.out.println(" "+i+1+"- " + inventaire.get(i));
+            System.out.println("     "+(i+1)+"- " + inventaire.get(i).getNom());
         }
     }
 
     public void choixItem(){
-        System.out.println("Quel objet voulez-vous utiliser ?");
+        System.out.println("\n"+
+                "Quel objet voulez-vous utiliser ?");
         for(int i=0;i<inventaire.size();i++)
-            System.out.println(" "+i+1+"- "+inventaire.get(i).getNom());
+            System.out.println(" "+(i+1)+"- "+inventaire.get(i).getNom());
         System.out.print("Votre choix : ");
-        inventaire.get(Main.testInt()-1).use();
+        int choixInt=Main.testInt()-1;
+        try {
+            inventaire.get(choixInt).use(this);
+            inventaire.remove(choixInt);
+        }catch (Exception e) {
+            System.out.println("Il n'y a pas d'objet à cette emplacement");
+        }
     }
 
     public Stack<Planete> getListePlaneteVisite() {

@@ -7,6 +7,7 @@ public class Jupiter extends Planete{
         setNom("Jupiter");
         setCout(300);
         setChancePirate(1);
+        setListeItem(new Item[3]);
         getListeItem()[0]=new MoyenGaz();
         getListeItem()[1]=new PetitGaz();
         getListeItem()[2]=new PetitKit();
