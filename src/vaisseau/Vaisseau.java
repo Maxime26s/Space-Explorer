@@ -34,7 +34,7 @@ public class Vaisseau {
         this.inventaire = new ArrayList<>();
         tempSize=inventaire.size();
         for(int i=0;i<tempSize;i++)
-            inventaire.add(inventaire.get(i));
+            this.inventaire.add(inventaire.get(i));
         this.carburant = carburant;
         this.pv = pv;
         this.vaisseauPast = vaisseauPast;
