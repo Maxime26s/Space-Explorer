@@ -54,17 +54,26 @@ public class Vaisseau {
 
     public void choixItem(){
         System.out.println("\n"+
-                "Quel objet voulez-vous utiliser ?");
+                "Quel objet voulez-vous utiliser ?\n"+
+                " 1- Aucun");
         for(int i=0;i<inventaire.size();i++)
-            System.out.println(" "+(i+1)+"- "+inventaire.get(i).getNom());
+            System.out.println(" "+(i+2)+"- "+inventaire.get(i).getNom());
         System.out.print("Votre choix : ");
-        int choixInt=Main.testInt()-1;
-        try {
-            inventaire.get(choixInt).use(this);
-            inventaire.remove(choixInt);
-        }catch (Exception e) {
-            System.out.println("Il n'y a pas d'objet à cette emplacement");
+        int choixInt=Main.testInt();
+        switch (choixInt){
+            case 1:
+                break;
+            default:
+                try {
+                    inventaire.get(choixInt-2).use(this);
+                    inventaire.remove(choixInt-2);
+                }catch (Exception e) {
+                    System.out.println("Il n'y a pas d'objet à cette emplacement");
+                    choixItem();
+                }
+                break;
         }
+
     }
 
     public Stack<Planete> getListePlaneteVisite() {
